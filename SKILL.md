@@ -42,32 +42,32 @@ allowed-tools:
 
 ## Порядок работы
 
-Скрипты лежат в самом скилле: `C:\Users\BSS\.dsh\skills\llm-reseller-audit\scripts\`.
+Скрипты лежат в каталоге скилла, `scripts\`; команды ниже выполняются из этого каталога. Путь зависит от харнесса: `~/.dsh/skills/llm-reseller-audit` в DeepSeek Harness, `~/.claude/skills/llm-reseller-audit` в Claude Code, `~/.agents/skills/llm-reseller-audit` — кросс-рантайм алиас. Агент не нужен: скрипты запускаются и вручную.
 
 ### 1. Снять эталон
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File C:\Users\BSS\.dsh\skills\llm-reseller-audit\scripts\probe.ps1 -Name official -BaseUrl https://api.deepseek.com -Model deepseek-flash -ApiKey "sk-..."
+powershell -ExecutionPolicy Bypass -File scripts\probe.ps1 -Name official -BaseUrl https://api.deepseek.com -Model deepseek-flash -ApiKey "sk-..."
 ```
 
 ### 2. Снять карточку посредника
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File C:\Users\BSS\.dsh\skills\llm-reseller-audit\scripts\probe.ps1 -Name proxy -BaseUrl <BASE_URL> -Model <MODEL> -ApiKey "sk-..."
+powershell -ExecutionPolicy Bypass -File scripts\probe.ps1 -Name proxy -BaseUrl <BASE_URL> -Model <MODEL> -ApiKey "sk-..."
 ```
 
 ### 3. Сравнить
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File C:\Users\BSS\.dsh\skills\llm-reseller-audit\scripts\probe.ps1 -Compare ".\probe-official.json,.\probe-proxy.json"
+powershell -ExecutionPolicy Bypass -File scripts\probe.ps1 -Compare ".\probe-official.json,.\probe-proxy.json"
 ```
 
 ### 4. Поведенческая батарея (обе стороны)
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File C:\Users\BSS\.dsh\skills\llm-reseller-audit\scripts\battery.ps1 -Name official -BaseUrl https://api.deepseek.com -Model deepseek-flash -ApiKey "sk-..."
-powershell -ExecutionPolicy Bypass -File C:\Users\BSS\.dsh\skills\llm-reseller-audit\scripts\battery.ps1 -Name proxy -BaseUrl <BASE_URL> -Model <MODEL> -ApiKey "sk-..."
-powershell -ExecutionPolicy Bypass -File C:\Users\BSS\.dsh\skills\llm-reseller-audit\scripts\battery.ps1 -Compare ".\battery-official.json,.\battery-proxy.json"
+powershell -ExecutionPolicy Bypass -File scripts\battery.ps1 -Name official -BaseUrl https://api.deepseek.com -Model deepseek-flash -ApiKey "sk-..."
+powershell -ExecutionPolicy Bypass -File scripts\battery.ps1 -Name proxy -BaseUrl <BASE_URL> -Model <MODEL> -ApiKey "sk-..."
+powershell -ExecutionPolicy Bypass -File scripts\battery.ps1 -Compare ".\battery-official.json,.\battery-proxy.json"
 ```
 
 ### 5. Сверить баланс
